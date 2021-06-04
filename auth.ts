@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 const users = [
     {
         username: process.env.username,
-        password: process.env.password, // todo pls change this omg
+        password: process.env.password,
         role: "user"
     }
 ];
@@ -37,7 +37,10 @@ app.post("/login", (req, res) => {
             refreshToken
         });
     } else {
-        res.send("Username or password incorrect");
+        res.json({
+            status: "failure",
+            reason: "Wrong username/password"
+        });
     }
 });
 
@@ -57,7 +60,7 @@ app.post("/token", (req, res) => {
             return res.sendStatus(403);
         }
 
-        const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret, { expiresIn: "20m" });
+        const accessToken = jwt.sign({ username: user.username, role: user.role }, accessTokenSecret, { expiresIn: "60m" });
 
         res.json({
             accessToken
