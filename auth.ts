@@ -8,8 +8,8 @@ app.use(bodyParser.json());
 
 const users = [
     {
-        username: process.env.username,
-        password: process.env.password,
+        username: process.env.shoppinglist_username,
+        password: process.env.shoppinglist_password,
         role: "user"
     }
 ];
